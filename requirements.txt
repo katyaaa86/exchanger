@@ -1,9 +1,11 @@
 asgiref==3.8.1
+beautifulsoup4==4.13.4
 black==25.1.0
 cfgv==3.4.0
 click==8.2.1
 distlib==0.3.9
-Django==5.2.1
+Django==4.2.21
+django-bootstrap-v5==1.0.11
 django-excel-response2==3.0.6
 django-six==1.0.5
 excel-base==1.0.4
@@ -27,6 +29,7 @@ python-dotenv==1.1.0
 PyYAML==6.0.2
 screen==1.0.1
 six==1.17.0
+soupsieve==2.7
 sqlparse==0.5.3
 TimeConvert==3.0.13
 tomli==2.2.1
