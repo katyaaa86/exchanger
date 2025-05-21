@@ -8,6 +8,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Ad(models.Model):
     CONDITION_CHOICES = (
         ('new', 'новый'),
