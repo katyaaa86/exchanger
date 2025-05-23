@@ -16,6 +16,9 @@
                     <th>Категории</th>
                     <th>Состояние</th>
                     <th>Дата создания</th>
+                    {% if is_author %}
+                        <th>Действия</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +36,13 @@
                     <td>{{ ad.category.all|join:", " }}</td>
                     <td>{{ ad.get_condition_display }}</td>
                     <td>{{ ad.created_at|date:"d.m.Y H:i" }}</td>
+                    {% if is_author %}
+                        <td>
+                            <a href="{% url 'ad_update' ad.pk %}">редактировать</a>
+                            <br>
+                            <a href="{% url 'ad_delete' ad.pk %}">удалить</a>
+                        </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

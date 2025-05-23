@@ -9,8 +9,11 @@
 </head>
 <body>
 <nav class="nav justify-content-center mb-3">
-  <a class="nav-link " href="{% url 'ads_list' %}">ADS</a>
-  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link " href="{% url 'ads_list' %}">Объявления</a>
+  {% if request.user.is_authenticated %}
+    <a class="nav-link" href="{% url 'ad_create' %}">Создать объявление</a>
+    <a class="nav-link" href="{% url 'user_ads_list' %}">Мои Объявления</a>
+  {% endif %}
 </nav>
 
   {% block content %}

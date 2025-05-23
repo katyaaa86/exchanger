@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Создать объявление
+{% endblock title %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data" style="width: 50rem;" class="mx-auto">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form|crispy }}
+        <input type="submit" value="Добавить объявление">
+    </div>
+</form>
+{% endblock content %}

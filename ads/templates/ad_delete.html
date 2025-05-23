@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Удалить объявление
+{% endblock title %}
+{% block content %}
+  <form method="POST" style="width: 50rem;" class="mx-auto">
+    {% csrf_token %}
+    <div class="d-flex justify-content-center" style="margin-top: 10rem;">
+      <p style="margin-right: 10px;">Вы уверены?</p>
+      <input type="submit" value="Подтвердить">
+    </div>
+  </form>
+{% endblock content %}
