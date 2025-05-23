@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import generic
 
+from ads.filters import AdFilter
 from ads.forms import AdForm
 from ads.models import Ad
 
@@ -23,6 +24,11 @@ class AdsList(generic.ListView):
         if self.request.user.is_authenticated:
             return queryset.filter(~Q(user=self.request.user))
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = AdFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class UserAdsList(LoginRequiredMixin, AdsList):

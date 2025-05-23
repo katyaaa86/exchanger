@@ -9,6 +9,7 @@ Django==4.2.21
 django-bootstrap-v5==1.0.11
 django-crispy-forms==2.4
 django-excel-response2==3.0.6
+django-filter==25.1
 django-six==1.0.5
 excel-base==1.0.4
 filelock==3.18.0

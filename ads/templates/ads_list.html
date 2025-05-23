@@ -5,6 +5,10 @@
 {% block content %}
     <h1 style="margin-bottom: 20px;">Список объявлений:</h1>
     {% if ads %}
+        <form method="GET" class="form-inline mb-5">
+            {{ filter.form }}
+            <input type="submit" value="Найти">
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -22,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for ad in ads %}
+                {% for ad in filter.qs %}
                 <tr>
                     <td><a href="{% url 'ad_detail' ad.pk %}">Подробнее</a></td>
                     <td>{{ ad.user.username }}</td>
