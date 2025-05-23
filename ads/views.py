@@ -12,3 +12,8 @@ class AdsList(generic.ListView):
 
     def get_queryset(self):
         return Ad.objects.select_related('user').prefetch_related('category')
+
+
+class AdDetail(generic.DetailView):
+    model = Ad
+    template_name = 'ad_detail.html'

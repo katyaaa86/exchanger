@@ -3,11 +3,12 @@
     Объявления
 {% endblock title %}
 {% block content %}
-    <h1>Список объявлений:</h1>
+    <h1 style="margin-bottom: 20px;">Список объявлений:</h1>
     {% if ads %}
         <table class="table">
             <thead>
                 <tr>
+                    <th>Ссылка</th>
                     <th>Автор</th>
                     <th>Название</th>
                     <th>Описание</th>
@@ -20,6 +21,7 @@
             <tbody>
                 {% for ad in ads %}
                 <tr>
+                    <td><a href="{% url 'ad_detail' ad.pk %}">Подробнее</a></td>
                     <td>{{ ad.user.username }}</td>
                     <td>{{ ad.title }}</td>
                     <td>{{ ad.description }}</td>

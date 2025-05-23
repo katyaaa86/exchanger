@@ -8,19 +8,12 @@
   {% load static %}
 </head>
 <body>
-
-<div class="container">
-  <ul class="nav bg-info">
-    <li class="nav-item">
-      <a class="nav-link link-light" href="/">HOME</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link link-light" href="{% url 'ads_list' %}">ADS</a>
-    </li>
-  </ul>
+<nav class="nav justify-content-center mb-3">
+  <a class="nav-link " href="{% url 'ads_list' %}">ADS</a>
+  <a class="nav-link" href="#">Link</a>
+</nav>
 
   {% block content %}
   {% endblock %}
-</div>
 </body>
 </html>
