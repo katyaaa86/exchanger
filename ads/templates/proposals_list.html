@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+    Объявления
+{% endblock title %}
+{% block content %}
+    <h1 style="margin-bottom: 20px;">Список предложений:</h1>
+    {% if proposals %}
+        <form method="GET" class="form-inline mb-5">
+            {{ filter.form }}
+            <input type="submit" value="Найти">
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Отправитель</th>
+                    <th>Получатель</th>
+                    <th>Комментарий</th>
+                    <th>Статус</th>
+                    <th>Дата создания</th>
+                    {% if is_received %}
+                        <th>Действия</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for prop in filter.qs %}
+                <tr>
+                    <td>{{ prop.ad_sender }}</td>
+                    <td>{{ prop.ad_receiver }}</td>
+                    <td>{{ prop.comment }}</td>
+                    <td>{{ prop.get_status_display }}</td>
+                    <td>{{ prop.created_at|date:"d.m.Y H:i" }}</td>
+                    {% if is_received and prop.status == 'pending' %}
+                        <td>
+                            <form action="{% url 'proposal_status_update' prop.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="status" value="accept">
+                                <button type="submit" class="btn btn-success btn-sm">принять</button>
+                            </form>
+                            <br>
+                            <form action="{% url 'proposal_status_update' prop.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="status" value="decline">
+                                <button type="submit" class="btn btn-danger btn-sm">отклонить</button>
+                            </form>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>Предложений нет!</h2>
+    {% endif %}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a>{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">>>></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    {% endif %}
+{% endblock content %}
