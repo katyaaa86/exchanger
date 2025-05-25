@@ -20,11 +20,17 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from ads.views import error_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ads/', include('ads.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = lambda request, exception: error_view(request, exception, status_code=400)
+handler403 = lambda request, exception: error_view(request, exception, status_code=403)
+handler404 = lambda request, exception: error_view(request, exception, status_code=404)
+handler500 = lambda request: error_view(request, status_code=500)

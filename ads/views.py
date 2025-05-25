@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View, generic
 from django.views.generic.edit import FormMixin
@@ -141,3 +141,16 @@ class ExchangeProposalStatusUpdateView(LoginRequiredMixin, View):
             proposal.save()
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+ERROR_MESSAGES = {
+    400: "Неверный запрос. Проверьте введённые данные.",
+    403: "Доступ запрещён. У вас нет прав для этого действия.",
+    404: "Страница не найдена.",
+    500: "Ошибка сервера.",
+}
+
+
+def error_view(request, exception=None, status_code=500):
+    error_message = ERROR_MESSAGES.get(status_code, "Неизвестная ошибка.")
+    return render(request, "error_page.html", {'error_message': error_message}, status=status_code)
