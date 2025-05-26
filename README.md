@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/katyaaa86/exchanger.svg?branch=main)](https://travis-ci.com/katyaaa86/exchanger)
+
 # Платформа для обмена вещами (бартерная система)
 
 Это монолитное веб-приложение на Django для организации
