@@ -26,6 +26,7 @@ from ads.views import error_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ads/', include('ads.urls')),
+    path('api/', include('ads.api.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
